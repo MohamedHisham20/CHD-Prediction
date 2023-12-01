@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- <link rel="stylesheet" href="style.css"> -->
+
+        <title>ai model app</title>
+        <title>hello</title>
+        
+        <meta name="ai model" description="decision making"/>
+        <link rel="icon" href="https://img.freepik.com/premium-vector/ai-technology-digital-artificial-intelligence-future-circuit-electronic-colorful-vector-logo-design_216988-1080.jpg">
+    </head>
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+}
+
+datalist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  writing-mode: horizontal-tb;
+  width: 125px;
+}
+
+label
+{
+    font-size: 1.25rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    align-content: center;
+    justify-content: center;
+      
+}
+
+input
+{
+    border-radius: 1rem;
+}
+
+.tx
+{
+    width: 150px;
+}
+select
+{
+    text-align: center;
+    width: 150px;
+    border-radius: 1rem;
+}
+.login
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: flex-start;
+    
+    height: 100vh;
+    background: none;
+    background-image: url("https://media.wired.co.uk/photos/606db180ae8f3096ae1680f1/16:9/w_2560%2Cc_limit/shutterstock_191590592.jpg");
+    backdrop-filter: blur(5px);
+}
+
+form h1
+{
+    text-align: center;
+    justify-content: center;
+    transform: translate(250%, 50%);
+}
+
+form
+{
+    padding: 20px;
+    width: 90vw;
+    border: 1px solid black; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    gap: 50px;
+    background: none;
+    background-color: rgb(255 255 255 / 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+}
+
+form>div{
+    /* border: 1px solid yellow; */
+    display: flex;
+    justify-content:space-between;
+    align-content:center;
+    gap: 20px;
+    
+}
+
+.row5
+{
+    display: flex;
+    justify-content: flex-start;
+    align-content:initial;
+    transform: translate(0%,-170%);
+}
+
+
+
+.row6
+{
+    display: flex;
+    justify-content: flex-start;
+    gap: 25%;
+
+}
+
+.row6 output
+{
+    border: 5px solid black;
+    font-size:50px;
+}
+
+
+button
+{
+    width: 100px;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+}
+
+
+button:hover
+{
+    background-color: red;
+    color: black;
+}
+    </style>
+    <body>
+        
+        <div class="login">
+            
+            <form action="{{ url_for('predict')}}"method="post">
+                <!-- <form method="get"> -->
+                <div>
+                    <h1>CHD Prediction</h1>
+                </div>
+                
+            <div class="row1">
+            <div>
+                <label for="age"> Age </label>
+                <input type="text" class="tx" name="age" id="age" required/>
+            </div>
+            <div>
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender">
+                    <option value="1">male</option>
+                    <option value="0">female</option>
+                </select>
+            </div>
+            <div>
+                <label for="type">Chest Pain Type</label>
+                <select name="chest_pain_type" id="type">
+                    <option value="1">typical angina</option>
+                    <option value="2">atypical angina</option>
+                    <option value="3">non-anginal pain</option>
+                    <option value="4">asymptomatic</option>
+                </select>
+            </div>    
+        </div>  
+        <div class="row2">
+            <div>
+                <label for="pb">Blood Pressure</label>
+                <input type="text" class="tx" name="bp"id="pb" required>
+            </div>
+
+            <div>
+                <label for="cholo">Cholesterol</label>
+                <input type="text" class="tx" name="cholesterol" required/>
+            </div>
+
+            <div>
+                <label for="fbs_gt_120">Fasting Blood Sugar > 120</label>
+                <!-- <select name="fbs_gt_120" id="fbs_gt_120">
+                    <option value="0">false</option>
+                    <option value="1">true</option>
+                </select> -->
+                <input type="checkbox" name="fbs_gt_120" id="fbs_gt_120" value="1">
+                <input type="hidden" name="fbs_gt_120" id="fbs_gt_120_hidden" value="0">
+            </div>
+        </div> 
+
+        <div class="row3">
+            <div>
+                <label for="ekg_result">EKG Result</label>
+                <select name="ekg_result" id="ekg_results">
+                    <option value="0">normal</option>
+                    <option value="1">Have ST-T wave abnormality</option>
+                    <option value="2">showing probable(definite) left ventricular hypertrophy</option>
+                </select>
+            </div>
+
+        
+            <div>
+                <label for="max_hr">Maximum Heart Rate</label>
+                <input type="text" class="tx" name="max_hr" id="max_hr" required>
+            </div>        
+
+            <div>
+                <label for="angina">Excercise Angina</label>
+                <!-- <select name="angina" id="angina">
+                    <option value="0">false</option>
+                    <option value="1">true</option>
+                </select> -->
+                <input type="checkbox" name="angina" id="angina" value="1">
+                <input type="hidden" name="angina" id="angina_hidden" value="0">
+            </div>
+        </div>
+
+        <div class="row4">
+            <div>
+               <label for="st_depression"> ST Depression</label>
+               <input type="text" class="tx" name="st_depression" id="st_depression" required>
+            </div>
+
+            <div>
+                <label for="st_slope">ST Slope</label>
+                <select name="st_slope" id="st_slope">
+                    <option value="1">up slope</option>
+                    <option value="2">flat</option>
+                    <option value="3">down slope</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="fluro">Number Of Vessels In Fluoroscopy</label>
+                <div class="slider">
+                    <!-- <label for="fluro">number of vessels in fluoroscopy </label> -->
+                    <input type="range" name="fluro" min="0" max="3" value="0" id="fluro" step="1" list="volsettings">
+                    <datalist id="volsettings">
+                        <option value="0" label="0">0</option>
+                        <option value="1" label="1">1</option>
+                        <option value="2" label="2">2</option>
+                        <option value="3" label="3">3</option>
+                    </datalist>
+                    
+                </div>
+                <!-- <select align="center" name="number_of_vessels_fluro" id="fluro">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select> -->
+            </div>
+        </div>
+
+        <div class="row5">
+            <div>
+                <label for="thallium">Thallium</label>
+                <select name="thallium" id="thallium">
+                    <option value="3">normal</option>
+                    <option value="6">fixed defect</option>
+                    <option value="7">reversable defect</option>
+                </select>
+            </div>
+             
+   
+        </div>
+
+        <script>
+            var ang = document.getElementById("angina");
+        function chckbx(){
+            if(document.getElementById("angina").checked) {
+            document.getElementById('angina_hidden').disabled = true;
+            }
+            if(document.getElementById("fbs_gt_120").checked) {
+            document.getElementById('fbs_gt_120_hidden').disabled = true;
+            }
+        }
+        </script>
+        <div class="row6">
+            <button type="submit" onclick="chckbx()" class="btn btn-primary btn-block btn-large">Predict</button>
+            <!-- <input type="submit" onclick="chckbx()"> -->
+        
+            <output> {{ prediction_text }} </output>
+        </div>
+            </form>
+        </div>
+    </div>
+    </body>
+</html>
